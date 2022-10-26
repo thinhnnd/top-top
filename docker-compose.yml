@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # video-streaming:
+  #   image: video-service
+  #   build: 
+  #     context: ./VideoService
+  #     dockerfile: Dockerfile.dev
+  #   container_name: video-service
+  #   volumes:
+  #       - ./VideoService:/usr/src/VideoService
+  #       - /usr/src/VideoService/bin/
+  #       - /usr/src/VideoService/obj/
+  #   ports:
+  #     - "5000:80"
+  #   environment:
+  #     - ASPNETCORE_URLS=http://*:80
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #   restart: "no"
+
+  aws-storage-service:
+    image: aws-video-storage-service
+    build: 
+      context: ./AWSVideoStorageService
+      dockerfile: Dockerfile.dev
+    container_name: aws-video-storage-service
+    volumes:
+        - ./AWSVideoStorageService:/usr/src/AWSVideoStorageService:z
+        - ./AWSVideoStorageService/bin:/usr/src/AWSVideoStorageService/bin/
+        - ./AWSVideoStorageService/obj:/usr/src/AWSVideoStorageService/obj/
+    ports:
+      - "7000:7000"
+    environment:
+      - ASPNETCORE_URLS=http://+:7000
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: "no"
+

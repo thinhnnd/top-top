@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /usr/src/AWSVideoStorageService
+
+ENV ASPNETCORE_URLS=http://*:7000
+EXPOSE 7000
+
+ENTRYPOINT ["dotnet", "watch", "run", "--no-launch-profile"]
